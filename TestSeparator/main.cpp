@@ -9,9 +9,9 @@ using namespace std;
 
 int main()
 {
-	string input = "<data attr=\"1\">  1 \n 2 </ data>"; //строка входных данных
+	string input = "<?xml version=\"1.0\" encoding=\"utf - 8\"?>\n<datachunk>\n<data>   1   < / data>\n<data>2< / data>\n< / datachunk>\n"; //строка входных данных
 	smatch result; //объект результатов
-	regex pattern("<\\s*?data(?:\\s*?\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?\\s*?>)(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>"); //Шаблон для поиска элементов
+	regex pattern("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?\\s*?>)(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>"); //Шаблон для поиска элементов
 
 	regex_search(input, result, pattern);
 

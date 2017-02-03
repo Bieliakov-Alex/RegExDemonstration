@@ -11,8 +11,10 @@ int main()
 	string inputStringWithoutAttr = "<?xml version=\"1.0\" encoding=\"utf - 8\"?>\n<datachunk>\n<data>   1   < / data>\n<data>2< / data>\n< / datachunk>\n"; //простой xml без атрибутов
 	smatch result;
 	smatch resultWithoutAttr;
-	//regex expressionData("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?)>(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>");
-	regex expressionData("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?)>");
+	regex expressionData("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?\\s*?>)(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>");
+						 //"<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?\\s*?>(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>";
+	//regex expressionData("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?)>");
+	//regex expressionData1("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?)\\s*?>(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>");
 
 	regex_search(inputString, result, expressionData);
 	regex_search(inputStringWithoutAttr, resultWithoutAttr, expressionData);
