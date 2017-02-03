@@ -7,19 +7,29 @@ using namespace std;
 
 int main()
 {
-	string inputString = "<?xml version=\"1.0\" encoding=\"utf - 8\"?>\n<datachunk>\n<data>   1   < / data>\n<data>2< / data>\n< / datachunk>\n"; //простой xml
+	string inputString = "<?xml version=\"1.0\" encoding=\"utf - 8\"?>\n<datachunk>\n<data attr=\"1\" attr2=\"1\">   1   < / data>\n<data>2< / data>\n< / datachunk>\n"; //простой xml с атрибутами
+	string inputStringWithoutAttr = "<?xml version=\"1.0\" encoding=\"utf - 8\"?>\n<datachunk>\n<data>   1   < / data>\n<data>2< / data>\n< / datachunk>\n"; //простой xml без атрибутов
 	smatch result;
-	//regex expressionData("<\\s*data\\s*>[:alnum:]*<\\s*/\\s*data\\s*>");
-	regex expressionData("<\\s*?data\\s*?>(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>");
+	smatch resultWithoutAttr;
+	//regex expressionData("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?)>(([\x20-\x7E]|[ \t\r\n\v\f])*?)<\\s*?/\\s*?data\\s*?>");
+	regex expressionData("<\\s*?data(?:\\s*?>|\\s+?(?:[\x20-\x7E]|[ \t\r\n\v\f])*?)>");
 
 	regex_search(inputString, result, expressionData);
+	regex_search(inputStringWithoutAttr, resultWithoutAttr, expressionData);
 
 	int count = result.size();
-	std::cout << "Count of matches: " << count << std::endl;
+	int countWithoutAttr = resultWithoutAttr.size();
+	cout << "Count of matches: " << count << endl;
 
 	for (int i = 0;i < count;i++)
 	{
-		std::cout << result[i] << std::endl;
+		cout << result[i] << endl;
+	}
+	cout << endl;
+	cout << "Count without attributes: " << countWithoutAttr << endl;
+	for (int i = 0;i < countWithoutAttr;i++)
+	{
+		cout << resultWithoutAttr[i] << endl;
 	}
 
 	_getch();
